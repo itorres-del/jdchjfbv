@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NMOR | Narrativas Escénicas que Trascienden</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel (Alternativa a Trajan Pro) y Montserrat (Alternativa a Myriad/Neutra) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --negro-full: #000000;
+            --gris-oscuro: #414140;
+            --gris-claro: #EAEAEA;
+            --blanco: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--blanco);
+            color: var(--negro-full);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .font-decorative {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.15em;
+        }
+
+        /* Slider Animations */
+        .slide {
+            display: none;
+            animation: fade 1.5s ease-in-out forwards;
+        }
+        .slide.active {
+            display: block;
+        }
+        @keyframes fade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .overlay-dark {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.85));
+        }
+
+        .btn-premium {
+            background-color: var(--negro-full);
+            color: var(--blanco);
+            border: 1px solid var(--negro-full);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .btn-premium:hover {
+            background-color: transparent;
+            color: var(--negro-full);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--blanco);
+            color: var(--blanco);
+            transition: all 0.4s;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--blanco);
+            color: var(--negro-full);
+        }
+
+        .card-service {
+            transition: all 0.5s ease;
+            border-bottom: 1px solid transparent;
+        }
+        .card-service:hover {
+            background-color: var(--negro-full);
+            color: var(--blanco);
+            border-bottom: 1px solid var(--gris-oscuro);
+        }
+
+        /* Success Message Styling */
+        #thank-you-state {
+            display: none;
+            animation: slideUp 0.6s ease-out forwards;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- 1. NAVEGACIÓN (HEADER) -->
+    <header class="fixed w-full z-[100] bg-white/95 border-b border-gray-100 py-5 px-6 md:px-12 flex justify-between items-center transition-all duration-300" id="main-nav">
+        <div class="flex flex-col">
+            <span class="font-decorative text-xl md:text-2xl font-bold leading-none tracking-widest">NMOR</span>
+            <span class="text-[7px] md:text-[8px] tracking-[0.4em] uppercase opacity-70 font-semibold">Espectáculos y Multimedia</span>
+        </div>
+        <nav class="hidden lg:flex gap-10 text-[10px] font-bold uppercase tracking-[0.2em] items-center">
+            <a href="#nosotros" class="hover:opacity-40 transition-opacity">Nosotros</a>
+            <a href="#servicios" class="hover:opacity-40 transition-opacity">Experiencias</a>
+            <a href="#portafolio" class="hover:opacity-40 transition-opacity">Insignia</a>
+            <a href="#contacto" class="btn-premium px-8 py-3">Agenda Cita de Exploración</a>
+        </nav>
+        <button class="lg:hidden text-2xl">☰</button>
+    </header>
+
+    <!-- 2. HERO SECTION (IMPACTO PREMIUM) -->
+    <section class="relative h-screen w-full overflow-hidden bg-black">
+        <div id="slider">
+            <!-- Slide 1 -->
+            <div class="slide active absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&q=80&w=1920" alt="Ingeniería Escénica" class="w-full h-full object-cover brightness-75">
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=1920" alt="Producción de eventos" class="w-full h-full object-cover brightness-75">
+            </div>
+        </div>
+        
+        <div class="overlay-dark absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6">
+            <h1 class="font-decorative text-4xl md:text-7xl mb-6 uppercase tracking-tight max-w-5xl leading-tight">Narrativas escénicas que transienden</h1>
+            <p class="text-sm md:text-lg font-light max-w-3xl mb-10 opacity-80 leading-relaxed tracking-wide">Producción escénica, dirección técnica y creatividad de alto nivel para eventos empresariales que requieren resultados impecables.</p>
+            <div class="flex flex-col md:flex-row gap-4">
+                <a href="#contacto" class="btn-premium bg-white text-black border-white px-10 py-4">Solicitar Propuesta Técnica</a>
+                <a href="#portafolio" class="btn-outline px-10 py-4">Explorar Portafolio</a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+            <div class="w-[1px] h-16 bg-white mx-auto"></div>
+        </div>
+    </section>
+
+    <!-- 3. SECCIÓN: NOSOTROS -->
+    <section id="nosotros" class="py-28 px-6 md:px-20 bg-white">
+        <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-20 items-center">
+            <div class="lg:w-1/2">
+                <h2 class="font-decorative text-3xl md:text-4xl mb-8 uppercase leading-tight">La Fusión del Arte y la Innovación</h2>
+                <p class="text-gray-600 mb-6 text-sm md:text-base leading-loose">
+                    NMOR es una casa productora especializada en espectáculos corporativos de alto nivel. Integramos artes performativas, tecnología digital e ingeniería escénica para desarrollar producciones precisas, visualmente impactantes y operativamente impecables.
+                </p>
+                <div class="border-l-2 border-black pl-8 my-10">
+                    <h4 class="font-bold text-xs uppercase tracking-[0.3em] mb-3">Nuestra Misión</h4>
+                    <p class="text-sm text-gray-500 italic leading-relaxed">"Crear espectáculos que integren creatividad, rigor técnico y una ejecución impecable, elevando cada evento corporativo a una experiencia memorable."</p>
+                </div>
+            </div>
+            <div class="lg:w-1/2 grid grid-cols-2 gap-4">
+                <img src="IMÁGENES/solista-show.png" alt="Cultura NMOR" class="w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                <img src="IMÁGENES/Chica.png" alt="Arte NMOR" class="w-full h-64 object-cover mt-8 grayscale hover:grayscale-0 transition-all duration-700">
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. DIFERENCIADORES ESTRATÉGICOS (VENTA B2B) -->
+    <section class="bg-nmor-grey py-24 px-6 md:px-20 border-y border-gray-100">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <div class="w-12 h-[1px] bg-black mb-6"></div>
+                    <h3 class="font-decorative text-lg mb-4 uppercase">Logística de Precisión</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">Nuestra obsesión por la puntualidad y el rigor en el montaje garantiza que su evento se ejecute sin contratiempos, respetando cada segundo de su cronograma.</p>
+                </div>
+                <div>
+                    <div class="w-12 h-[1px] bg-black mb-6"></div>
+                    <h3 class="font-decorative text-lg mb-4 uppercase">Creaciones Originales</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">A diferencia de los productos "armados" del mercado, desarrollamos conceptos a la medida que integran la identidad de su marca en una narrativa escénica única.</p>
+                </div>
+                <div>
+                    <div class="w-12 h-[1px] bg-black mb-6"></div>
+                    <h3 class="font-decorative text-lg mb-4 uppercase">Talento de Élite</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">Contamos con una red curada de artistas y técnicos con estándares internacionales, asegurando un control total sobre la calidad y el impacto de cada performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PRODUCCIONES DE ALTO IMPACTO (SERVICIOS) -->
+<section id="servicios" class="py-28 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <h2 class="font-decorative text-4xl uppercase max-w-md">Producciones de alto impacto</h2>
+                <p class="text-xs uppercase tracking-[0.2em] text-gray-400 font-bold">Standard of Excellence</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-gray-100">
+                
+                <!-- BLOQUE 01 -->
+                <div class="group relative h-[600px] overflow-hidden border-r border-gray-100 bg-black">
+                    <!-- Foto de fondo: Visible por defecto, desaparece en hover -->
+                    <img src="IMÁGENES/México.png" 
+                         class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:opacity-0 transition-opacity duration-700 z-0" alt="México Contemporáneo">
+                    
+                    <!-- Overlay para legibilidad inicial, se vuelve negro sólido en hover -->
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black transition-colors duration-500 z-10"></div>
+
+                    <!-- Contenido Informativo -->
+                    <div class="relative z-20 p-12 h-full flex flex-col justify-between text-white">
+                        <div>
+                            <span class="text-[10px] font-bold text-gray-400 group-hover:text-gray-600 mb-8 block transition-colors">01</span>
+                            <h3 class="font-decorative text-xl mb-6 uppercase leading-tight">México Contemporáneo</h3>
+                            
+                            <!-- Descripción: Se revela en hover -->
+                            <p class="text-xs leading-loose opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
+                                Una odisea visual que fusiona nuestras raíces con acrobacias de alto rendimiento y tecnología de vanguardia. Diseñada para galas corporativas que buscan elegancia cultural sin caer en lo folclórico.
+                            </p>
+                        </div>
+                        <div class="w-full h-[1px] bg-white/20 group-hover:bg-gray-800 transition-colors"></div>
+                    </div>
+                </div>
+
+                <!-- BLOQUE 02 -->
+                <div class="group relative h-[600px] overflow-hidden border-r border-gray-100 bg-black">
+                    <img src="IMÁGENES/Led.png" 
+                         class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:opacity-0 transition-opacity duration-700 z-0" alt="Cyberpunk">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black transition-colors duration-500 z-10"></div>
+                    <div class="relative z-20 p-12 h-full flex flex-col justify-between text-white">
+                        <div>
+                            <span class="text-[10px] font-bold text-gray-400 group-hover:text-gray-600 mb-8 block transition-colors">02</span>
+                            <h3 class="font-decorative text-xl mb-6 uppercase leading-tight">Luminiscencia Cyber-Punk</h3>
+                            <p class="text-xs leading-loose opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
+                                Performance de alta energía con tecnología láser y LED, diseñado para lanzamientos de marca disruptivos.
+                            </p>
+                        </div>
+                        <div class="w-full h-[1px] bg-white/20 group-hover:bg-gray-800 transition-colors"></div>
+                    </div>
+                </div>
+
+                <!-- BLOQUE 03 -->
+                <div class="group relative h-[600px] overflow-hidden border-r border-gray-100 bg-black">
+                    <img src="IMÁGENES/circo .png" 
+                         class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:opacity-0 transition-opacity duration-700 z-0" alt="Circo">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black transition-colors duration-500 z-10"></div>
+                    <div class="relative z-20 p-12 h-full flex flex-col justify-between text-white">
+                        <div>
+                            <span class="text-[10px] font-bold text-gray-400 group-hover:text-gray-600 mb-8 block transition-colors">03</span>
+                            <h3 class="font-decorative text-xl mb-6 uppercase leading-tight">Etéreo: Fantasía Circense</h3>
+                            <p class="text-xs leading-loose opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
+                                El arte de lo imposible llevado a escena. Actos aéreos y destreza física con estándares de producción global.
+                            </p>
+                        </div>
+                        <div class="w-full h-[1px] bg-white/20 group-hover:bg-gray-800 transition-colors"></div>
+                    </div>
+                </div>
+
+                <!-- BLOQUE 04 -->
+                <div class="group relative h-[600px] overflow-hidden bg-black">
+                    <img src="IMÁGENES/concierto.png" 
+                         class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:opacity-0 transition-opacity duration-700 z-0" alt="Concierto">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black transition-colors duration-500 z-10"></div>
+                    <div class="relative z-20 p-12 h-full flex flex-col justify-between text-white">
+                        <div>
+                            <span class="text-[10px] font-bold text-gray-400 group-hover:text-gray-600 mb-8 block transition-colors">04</span>
+                            <h3 class="font-decorative text-xl mb-6 uppercase leading-tight">Legendary Concert</h3>
+                            <p class="text-xs leading-loose opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
+                                Producción sonora y visual de nivel estadio para cierres de convenciones y aniversarios corporativos.
+                            </p>
+                        </div>
+                        <div class="w-full h-[1px] bg-white/20 group-hover:bg-gray-800 transition-colors"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. PORTAFOLIO INSIGNIA (THE BIG FOUR) -->
+    <section id="portafolio" class="py-28 px-6 md:px-20 bg-black text-white">
+        <h2 class="font-decorative text-3xl md:text-5xl text-center mb-20 uppercase tracking-tighter">Portafolio Insignia</h2>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Caso 1 -->
+            <div class="group relative aspect-video overflow-hidden bg-gray-900">
+                <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-30 transition-all duration-1000" alt="Corazón de Luna">
+                <div class="absolute inset-0 p-10 flex flex-col justify-end">
+                    <h4 class="font-decorative text-2xl uppercase mb-3">Corazón de Luna</h4>
+                    <p class="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-4">Folclore & Circo</p>
+                    <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-sm">Obra ecléctica inspirada en el folclore mexicano que fusiona danza, circo y comedia.</p>
+                </div>
+            </div>
+            <!-- Caso 2 -->
+            <div class="group relative aspect-video overflow-hidden bg-gray-900">
+                <img src="IMÁGENES/Porta.png" class="w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-30 transition-all duration-1000" alt="Firefly Neon Show">
+                <div class="absolute inset-0 p-10 flex flex-col justify-end">
+                    <h4 class="font-decorative text-2xl uppercase mb-3">Firefly Neon Show</h4>
+                    <p class="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-4">Tecnología Lumínica</p>
+                    <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-sm">Viaje sensorial a través de un portal de luz mediante tecnología de vanguardia.</p>
+                </div>
+            </div>
+            <!-- Caso 3 -->
+            <div class="group relative aspect-video overflow-hidden bg-gray-900">
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-30 transition-all duration-1000" alt="Alma de Viento">
+                <div class="absolute inset-0 p-10 flex flex-col justify-end">
+                    <h4 class="font-decorative text-2xl uppercase mb-3">Alma de Viento</h4>
+                    <p class="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-4">Narrativa Ancestral</p>
+                    <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-sm">Relato inspirado en la fauna mexicana; arte circense con un mensaje de armonía.</p>
+                </div>
+            </div>
+            <!-- Caso 4 -->
+            <div class="group relative aspect-video overflow-hidden bg-gray-900">
+                <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover opacity-50 group-hover:scale-110 group-hover:opacity-30 transition-all duration-1000" alt="Meztli">
+                <div class="absolute inset-0 p-10 flex flex-col justify-end">
+                    <h4 class="font-decorative text-2xl uppercase mb-3">Meztli</h4>
+                    <p class="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-4">Mística Mexica</p>
+                    <p class="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-sm">Encuentro cósmico que honra la riqueza ancestral mexica a través del movimiento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FORMULARIO DE FILTRADO (CALIFICACIÓN MQL) -->
+    <section id="contacto" class="py-28 px-6 md:px-20 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div id="form-container">
+                <div class="text-center mb-16">
+                    <h2 class="font-decorative text-4xl uppercase mb-4">Iniciar Consultoría Técnica</h2>
+                    <p class="text-gray-400 text-xs tracking-widest uppercase">Comparte los detalles de tu evento para diseñar una solución alineada a tus objetivos.</p>
+                </div>
+                
+                <form id="mqlForm" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                    <div class="relative">
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Nombre Completo</label>
+                        <input type="text" id="nombre" required class="w-full border-b border-gray-200 py-3 focus:border-black outline-none transition-all text-sm">
+                    </div>
+                    <div class="relative">
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Empresa / Firma</label>
+                        <input type="text" id="empresa" required class="w-full border-b border-gray-200 py-3 focus:border-black outline-none transition-all text-sm">
+                    </div>
+                    <div class="relative col-span-1 md:col-span-2">
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Correo Corporativo</label>
+                        <input type="email" id="correo" required class="w-full border-b border-gray-200 py-3 focus:border-black outline-none transition-all text-sm">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Volumen de Audiencia</label>
+                        <select id="volumen" required class="w-full border-b border-gray-200 py-3 focus:border-black outline-none transition-all text-sm bg-transparent cursor-pointer">
+                            <option value="">Seleccione...</option>
+                            <option value="50-150">50 - 150 asistentes</option>
+                            <option value="150-500">150 - 500 asistentes</option>
+                            <option value="500+">+500 asistentes</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Rango de Inversión (MXN)</label>
+                        <select id="inversion" required class="w-full border-b border-gray-200 py-3 focus:border-black outline-none transition-all text-sm bg-transparent cursor-pointer">
+                            <option value="">Seleccione...</option>
+                            <option value="50-100k">$50k - $100k</option>
+                            <option value="100-180k">$100k - $180k</option>
+                            <option value="200k+">Proyectos Premium +$200k</option>
+                        </select>
+                    </div>
+                    <div class="col-span-1 md:col-span-2">
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Comentarios Adicionales</label>
+                        <textarea id="comentarios" rows="3" class="w-full border-b border-gray-200 py-3 focus:border-black outline-none transition-all text-sm resize-none"></textarea>
+                    </div>
+                    <div class="col-span-1 md:col-span-2 pt-6">
+                        <button type="submit" class="w-full btn-premium py-5 text-xs tracking-[0.4em]">Solicitar Propuesta Técnica</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 8. THANK YOU STATE (CONFIRMACIÓN) -->
+            <div id="thank-you-state" class="text-center py-20">
+                <div class="w-20 h-20 border-2 border-black rounded-full flex items-center justify-center mx-auto mb-8">
+                    <span class="text-2xl">✓</span>
+                </div>
+                <h2 class="font-decorative text-4xl uppercase mb-6">¡Solicitud Recibida!</h2>
+                <p class="text-gray-600 max-w-xl mx-auto leading-loose text-sm">
+                    Un Productor Ejecutivo se pondrá en contacto con usted en menos de 24 horas para dar seguimiento a su propuesta técnica. En NMOR, la precisión empieza desde el primer contacto.
+                </p>
+                <button onclick="window.location.reload()" class="mt-10 text-[10px] font-bold uppercase tracking-widest border-b border-black">Volver al inicio</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER (DATOS DE CONTACTO REALES) -->
+    <footer class="bg-black text-white pt-24 pb-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
+                <div class="md:col-span-2">
+                    <span class="font-decorative text-3xl font-bold leading-none tracking-widest block mb-4">NMOR</span>
+                    <p class="text-xs text-gray-500 max-w-xs leading-relaxed uppercase tracking-widest">Estándares Internacionales en Producción Escénica.</p>
+                </div>
+                <div class="space-y-4">
+                    <h5 class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Ubicación</h5>
+                    <p class="text-xs leading-relaxed opacity-70">Calle Francia #1438, Col. Moderna,<br>Guadalajara, Jal, MX.</p>
+                </div>
+                <div class="space-y-4">
+                    <h5 class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Contacto Directo</h5>
+                    <p class="text-xs opacity-70">T: +52 33 4051 5423</p>
+                    <p class="text-xs opacity-70">W: 811 229 6056</p>
+                    <p class="text-xs opacity-70">E: nmor.espectaculos@nmor.mx</p>
+                </div>
+            </div>
+            <div class="pt-12 border-t border-gray-900 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-[9px] text-gray-600 tracking-[0.2em] uppercase">NMOR Espectáculos 2026 © - Todos los derechos reservados.</p>
+                <div class="flex gap-8 text-[9px] font-bold uppercase tracking-widest text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Slider Logic
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function rotateSlides() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(rotateSlides, 5000);
+
+        // 2. Navigation Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-3', 'shadow-sm');
+            } else {
+                nav.classList.remove('py-3', 'shadow-sm');
+            }
+        });
+
+        // 3. Form Submission Logic
+        const form = document.getElementById('mqlForm');
+        const formContainer = document.getElementById('form-container');
+        const thankYouState = document.getElementById('thank-you-state');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Recolección de datos para analíticos (simulado)
+            const leadData = {
+                nombre: document.getElementById('nombre').value,
+                empresa: document.getElementById('empresa').value,
+                correo: document.getElementById('correo').value,
+                volumen: document.getElementById('volumen').value,
+                inversion: document.getElementById('inversion').value
+            };
+            
+            console.log('Lead MQL Capturado:', leadData);
+
+            // Transición a Thank You State
+            formContainer.style.display = 'none';
+            thankYouState.style.display = 'block';
+            
+            // Scroll al mensaje de éxito
+            thankYouState.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    </script>
+ <!-- WhatsApp Floating Button -->
+<a href="https://wa.me/"
+   target="_blank"
+   class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition transform hover:scale-110">
+
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 32 32"
+         fill="currentColor"
+         class="w-8 h-8">
+        <path d="M16.04 2C8.29 2 2 8.29 2 16.04c0 2.83.83 5.48 2.27 7.71L2 30l6.42-2.21c2.15 1.34 4.66 2.12 7.62 2.12 7.75 0 14.04-6.29 14.04-14.04S23.79 2 16.04 2zm0 25.5c-2.47 0-4.76-.73-6.68-1.98l-.48-.3-3.81 1.31 1.27-3.71-.31-.5a11.37 11.37 0 01-1.77-6.06c0-6.31 5.14-11.45 11.45-11.45s11.45 5.14 11.45 11.45S22.35 27.5 16.04 27.5zm6.27-8.56c-.34-.17-2.01-.99-2.32-1.1-.31-.11-.54-.17-.77.17-.23.34-.88 1.1-1.08 1.33-.2.23-.4.26-.74.09-.34-.17-1.43-.53-2.73-1.69-1.01-.9-1.69-2.01-1.89-2.35-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.09-.17-.77-1.86-1.05-2.55-.27-.65-.55-.56-.77-.57h-.66c-.23 0-.6.09-.92.43-.31.34-1.21 1.18-1.21 2.88 0 1.7 1.24 3.34 1.41 3.57.17.23 2.43 3.72 5.89 5.21.82.35 1.46.56 1.96.72.82.26 1.56.22 2.15.13.66-.1 2.01-.82 2.3-1.62.29-.8.29-1.48.2-1.62-.09-.14-.31-.23-.66-.4z"/>
+    </svg>
+
+</a>
+</body>
+</html>
